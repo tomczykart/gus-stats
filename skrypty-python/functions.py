@@ -4,7 +4,7 @@ import requests
 
 #saving function
 def save_file(file_name,data):
-    p = pathlib.Path("data_import")
+    p = pathlib.Path(__file__).parent.joinpath('data_import')
     p.mkdir(exist_ok = True)
     with open(p.joinpath(file_name), 'w') as f:
         json.dump(data.json(),f)
