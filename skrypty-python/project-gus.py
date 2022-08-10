@@ -5,8 +5,13 @@ import json
 #dictionary = {"imie":"artur", "wiek":"15"}
 #data = json.dumps(dictionary)
 
-#assign data
-data = get_data(747495)
+#numbers of variables gathereded from gus api
+variables = [747340, 747335, 747330, 747595, 747500, 747505, 747515, 747520, 747525, 747530, 747535, 747540]
 
-#save data to file
-save_file("test.json",data);
+for variable in variables:
+
+    #assign data
+    data = get_data(variable)
+
+    #save data to file
+    save_file(f"data_v_{variable}.json",data);
