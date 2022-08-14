@@ -2,6 +2,7 @@ import pathlib
 import json
 import requests
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 #saving function
@@ -24,10 +25,26 @@ def generate_table(file_name):
     #read json
     with open(file_name) as json_data:
         gus_data = json.load(json_data)
-
     #retrive results, flatten nested json
     gus_data = gus_data['results']
     gus_data = pd.json_normalize(gus_data,'values',['name'])
     #pivot the table
-    gus_data = gus_data.pivot_table(values='val', index='name', columns='year')
+    #gus_data = gus_data.pivot_table(values='val', index='name', columns='year')
     return gus_data
+
+
+def pivot_table(table):
+        #pivot the table
+    table = table.pivot_table(values='val', index='name', columns='year')
+    return table
+
+
+def plot_chart(data):
+    fig, (ax) = plt.subplots()
+    data.groupby('name').plot(kind='line',x='year', y='val', ax=ax)
+
+    plt.title('Ilość wydanych pozwoleń na budowę')
+    plt.xlabel('lata')
+    plt.ylabel('ilość pozwoleń')
+    plt.legend().remove()
+    plt.show()
