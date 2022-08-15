@@ -30,6 +30,9 @@ def generate_table(file_name):
     gus_data = pd.json_normalize(gus_data,'values',['name'])
     #pivot the table
     #gus_data = gus_data.pivot_table(values='val', index='name', columns='year')
+    pd.set_option('display.max_rows', 100)
+    pd.set_option('display.max_columns', 100)
+    pd.set_option('display.width', None)
     return gus_data
 
 
